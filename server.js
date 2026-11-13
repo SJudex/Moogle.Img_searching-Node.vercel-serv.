@@ -1,4 +1,21 @@
-module.exports = async (req, res) => {
+require('dns').setDefaultResultOrder('ipv4first');
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+
+const app = express();
+
+app.use(cors());
+// Используем path.join(__dirname, ...), чтобы Vercel точно находил папку public
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/lightgallery', express.static(path.join(__dirname, 'node_modules/lightgallery')));
+
+// Явно отдаем главную страницу при заходе на корень сайта
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/api/search', async (req, res) => {
     const query = req.query.q;
     const page = parseInt(req.query.page, 10) || 0;
 
@@ -70,7 +87,7 @@ module.exports = async (req, res) => {
             }
         }
 
-        return res.status(200).json({
+        return res.json({
             total: images.length,
             page: page,
             hasMore: images.length > 0,
@@ -81,4 +98,14 @@ module.exports = async (req, res) => {
         console.error('Ошибка поиска:', error.name, error.message);
         return res.status(500).json({ error: 'Ошибка сервера: ' + error.message });
     }
-};
+});
+
+// Запускаем локальный порт только на вашем компьютере, а для Vercel экспортируем app
+if (!process.env.VERCEL) {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`🚀 Сервер запущен: http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
