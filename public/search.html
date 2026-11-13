@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/lightgallery/css/lightgallery-bundle.min.css">
+    <title>Moogle Поиск</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <a href="index.html" class="logo logo-header">
+                <span>M</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+            </a>
+            
+            <div class="search-container">
+                <form id="header-search-form" action="search.html" method="GET">
+                    <input id="header-search-input" type="search" name="search" placeholder="Поиск картинок..." autocomplete="off">
+                    <button type="submit" class="search-btn" aria-label="Найти">
+                        <svg class="search-icon" viewBox="0 0 24 24">
+                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="galery"></div>
+
+        <div id="load-more-container" style="display: none;">
+            <button id="load-more-btn" type="button"></button>
+        </div>
+    </div>
+    
+<script src="/lightgallery/lightgallery.min.js"></script>
+<script src="/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script>
+
+<script>
+    const galleryContainer = document.querySelector('.galery');
+    const searchForm = document.getElementById('header-search-form');
+    const searchInput = document.getElementById('header-search-input');
+    const loadMoreContainer = document.getElementById('load-more-container');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+
+    const LOAD_MORE_HTML = `
+        <span>Ещё результаты</span>
+        <svg class="load-more-icon" viewBox="0 0 24 24">
+            <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
+        </svg>
+    `;
+    loadMoreBtn.innerHTML = LOAD_MORE_HTML;
+
+    let lgInstance = null;
+    let currentQuery = '';
+    let currentPage = 0;
+    let isLoading = false;
+    const seenUrls = new Set();
+
+    const params = new URLSearchParams(window.location.search);
+    const initialQuery = params.get('q') || params.get('search');
+
+    if (initialQuery) {
+        searchInput.value = initialQuery;
+        document.title = `${initialQuery} — Moogle Поиск`;
+        loadImages(initialQuery, false);
+    }
+
+    searchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const newQuery = searchInput.value.trim();
+        if (!newQuery) return;
+
+        const newUrl = `${window.location.pathname}?search=${encodeURIComponent(newQuery)}`;
+        window.history.pushState({ query: newQuery }, '', newUrl);
+        document.title = `${newQuery} — Moogle Поиск`;
+        loadImages(newQuery, false);
+    });
+
+    window.addEventListener('popstate', () => {
+        const updatedParams = new URLSearchParams(window.location.search);
+        const queryFromHistory = updatedParams.get('search') || updatedParams.get('q') || '';
+        searchInput.value = queryFromHistory;
+        
+        if (queryFromHistory) {
+            document.title = `${queryFromHistory} — Moogle Поиск`;
+            loadImages(queryFromHistory, false);
+        } else {
+            document.title = 'Moogle Поиск';
+            galleryContainer.innerHTML = '';
+            loadMoreContainer.style.display = 'none';
+        }
+    });
+
+    loadMoreBtn.addEventListener('click', () => {
+        if (currentQuery && !isLoading) loadImages(currentQuery, true);
+    });
+
+    async function loadImages(searchQuery, isLoadMore = false) {
+        if (isLoading) return;
+        isLoading = true;
+
+        if (!isLoadMore) {
+            currentQuery = searchQuery;
+            currentPage = 0;
+            seenUrls.clear();
+            galleryContainer.innerHTML = '<div class="loader-wrapper"><div class="spinner"></div></div>';
+            loadMoreContainer.style.display = 'none';
+        } else {
+            loadMoreBtn.disabled = true;
+            loadMoreBtn.innerHTML = '<span class="spinner-small"></span>';
+        }
+
+        try {
+            const response = await fetch(`/api/search?q=${encodeURIComponent(currentQuery)}&page=${currentPage}`);
+            const data = await response.json();
+
+            if (!data.images || data.images.length === 0) {
+                if (!isLoadMore) galleryContainer.innerHTML = '<p>Ничего не найдено.</p>';
+                loadMoreContainer.style.display = 'none';
+                return;
+            }
+
+            const uniqueNewImages = data.images.filter(img => {
+                if (seenUrls.has(img.preview)) return false;
+                seenUrls.add(img.preview);
+                return true;
+            });
+
+            const cardsHtml = uniqueNewImages.map(img => `
+                <a href="${img.full}" class="galery-item">
+                    <img src="${img.preview}" alt="${img.tags}" loading="lazy" />
+                </a>
+            `).join('');
+
+            if (!isLoadMore) {
+                galleryContainer.innerHTML = cardsHtml;
+            } else {
+                galleryContainer.insertAdjacentHTML('beforeend', cardsHtml);
+            }
+
+            if (lgInstance) lgInstance.destroy();
+            lgInstance = lightGallery(galleryContainer, {
+                selector: '.galery-item',
+                plugins: [lgThumbnail],
+                thumbnail: true,
+                animateThumb: true,
+                zoomFromOrigin: false,
+                allowMediaOverlap: true,
+                toggleThumb: false,
+                download: true,
+                closable: true,
+                counter: false,
+                actualSize: false,
+                fullScreen: false,
+                rotate: false,
+                flipHorizontal: false,
+                flipVertical: false,
+                share: false,
+                autoplay: false,
+                speed: 300
+            });
+
+            if (uniqueNewImages.length > 0 && data.hasMore !== false) {
+                loadMoreContainer.style.display = 'flex';
+                currentPage++;
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+        } catch (err) {
+            console.error(err);
+            if (!isLoadMore) galleryContainer.innerHTML = '<p>Ошибка соединения с сервером.</p>';
+        } finally {
+            isLoading = false;
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.innerHTML = LOAD_MORE_HTML;
+        }
+    }
+</script>
+</body>
+</html>
