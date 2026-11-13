@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/lightgallery/(.*)",
+      "destination": "/node_modules/lightgallery/$1"
+    }
+  ]
+}
