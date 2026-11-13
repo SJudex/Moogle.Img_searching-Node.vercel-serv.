@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-fullscreen.umd.js",
+  "module": "lg-fullscreen.es5.js",
+  "typings": "../../types/plugins/fullscreen/lg-fullscreen.d.ts"
+}

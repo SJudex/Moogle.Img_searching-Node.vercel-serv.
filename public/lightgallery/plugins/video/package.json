@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-video.umd.js",
+  "module": "lg-video.es5.js",
+  "typings": "../../types/plugins/video/lg-video.d.ts"
+}

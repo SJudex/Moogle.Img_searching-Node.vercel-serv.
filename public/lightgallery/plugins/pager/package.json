@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-pager.umd.js",
+  "module": "lg-pager.es5.js",
+  "typings": "../../types/plugins/pager/lg-pager.d.ts"
+}

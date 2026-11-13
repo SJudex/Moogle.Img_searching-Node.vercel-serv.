@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-vimeo-thumbnail.umd.js",
+  "module": "lg-vimeo-thumbnail.es5.js",
+  "typings": "../../types/plugins/vimeoThumbnail/lg-vimeo-thumbnail.d.ts"
+}

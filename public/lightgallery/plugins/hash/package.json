@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-hash.umd.js",
+  "module": "lg-hash.es5.js",
+  "typings": "../../types/plugins/hash/lg-hash.d.ts"
+}

@@ -1,0 +1,133 @@
+{
+  "name": "lightgallery",
+  "version": "3.0.0",
+  "description": "lightGallery is a feature-rich, modular JavaScript gallery plugin for building beautiful image and video galleries for the web and the mobile",
+  "keywords": [
+    "lightgallery",
+    "gallery",
+    "lightbox",
+    "image-gallery",
+    "video-gallery",
+    "carousel",
+    "zoom",
+    "thumbnails",
+    "javascript",
+    "typescript"
+  ],
+  "homepage": "http://www.lightgalleryjs.com/",
+  "bugs": {
+    "url": "https://github.com/sachinchoolur/lightGallery/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sachinchoolur/lightGallery"
+  },
+  "license": "(GPL-3.0-only OR LicenseRef-Commercial)",
+  "author": {
+    "name": "Sachin Neravath",
+    "email": "sachi77n@gmail.com",
+    "url": "https://github.com/sachinchoolur"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
+  "main": "lightgallery.umd.js",
+  "min": "lightgallery.min.js",
+  "module": "lightgallery.es5.js",
+  "typings": "types/index.d.ts",
+  "unpkg": "lightgallery.min.js",
+  "jsdelivr": "lightgallery.min.js",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./lightgallery.es5.js",
+      "require": "./lightgallery.umd.js",
+      "script": "./lightgallery.min.js"
+    },
+    "./plugins/thumbnail": {
+      "types": "./types/plugins/thumbnail/lg-thumbnail.d.ts",
+      "import": "./plugins/thumbnail/lg-thumbnail.es5.js",
+      "require": "./plugins/thumbnail/lg-thumbnail.umd.js"
+    },
+    "./plugins/video": {
+      "types": "./types/plugins/video/lg-video.d.ts",
+      "import": "./plugins/video/lg-video.es5.js",
+      "require": "./plugins/video/lg-video.umd.js"
+    },
+    "./plugins/zoom": {
+      "types": "./types/plugins/zoom/lg-zoom.d.ts",
+      "import": "./plugins/zoom/lg-zoom.es5.js",
+      "require": "./plugins/zoom/lg-zoom.umd.js"
+    },
+    "./plugins/share": {
+      "types": "./types/plugins/share/lg-share.d.ts",
+      "import": "./plugins/share/lg-share.es5.js",
+      "require": "./plugins/share/lg-share.umd.js"
+    },
+    "./plugins/rotate": {
+      "types": "./types/plugins/rotate/lg-rotate.d.ts",
+      "import": "./plugins/rotate/lg-rotate.es5.js",
+      "require": "./plugins/rotate/lg-rotate.umd.js"
+    },
+    "./plugins/pager": {
+      "types": "./types/plugins/pager/lg-pager.d.ts",
+      "import": "./plugins/pager/lg-pager.es5.js",
+      "require": "./plugins/pager/lg-pager.umd.js"
+    },
+    "./plugins/hash": {
+      "types": "./types/plugins/hash/lg-hash.d.ts",
+      "import": "./plugins/hash/lg-hash.es5.js",
+      "require": "./plugins/hash/lg-hash.umd.js"
+    },
+    "./plugins/justified": {
+      "types": "./types/plugins/justified/lg-justified.d.ts",
+      "import": "./plugins/justified/lg-justified.es5.js",
+      "require": "./plugins/justified/lg-justified.umd.js"
+    },
+    "./plugins/fullscreen": {
+      "types": "./types/plugins/fullscreen/lg-fullscreen.d.ts",
+      "import": "./plugins/fullscreen/lg-fullscreen.es5.js",
+      "require": "./plugins/fullscreen/lg-fullscreen.umd.js"
+    },
+    "./plugins/comment": {
+      "types": "./types/plugins/comment/lg-comment.d.ts",
+      "import": "./plugins/comment/lg-comment.es5.js",
+      "require": "./plugins/comment/lg-comment.umd.js"
+    },
+    "./plugins/autoplay": {
+      "types": "./types/plugins/autoplay/lg-autoplay.d.ts",
+      "import": "./plugins/autoplay/lg-autoplay.es5.js",
+      "require": "./plugins/autoplay/lg-autoplay.umd.js"
+    },
+    "./plugins/mediumZoom": {
+      "types": "./types/plugins/mediumZoom/lg-medium-zoom.d.ts",
+      "import": "./plugins/mediumZoom/lg-medium-zoom.es5.js",
+      "require": "./plugins/mediumZoom/lg-medium-zoom.umd.js"
+    },
+    "./plugins/originCrop": {
+      "types": "./types/plugins/originCrop/lg-origin-crop.d.ts",
+      "import": "./plugins/originCrop/lg-origin-crop.es5.js",
+      "require": "./plugins/originCrop/lg-origin-crop.umd.js"
+    },
+    "./plugins/relativeCaption": {
+      "types": "./types/plugins/relativeCaption/lg-relative-caption.d.ts",
+      "import": "./plugins/relativeCaption/lg-relative-caption.es5.js",
+      "require": "./plugins/relativeCaption/lg-relative-caption.umd.js"
+    },
+    "./plugins/vimeoThumbnail": {
+      "types": "./types/plugins/vimeoThumbnail/lg-vimeo-thumbnail.d.ts",
+      "import": "./plugins/vimeoThumbnail/lg-vimeo-thumbnail.es5.js",
+      "require": "./plugins/vimeoThumbnail/lg-vimeo-thumbnail.umd.js"
+    },
+    "./css/*": "./css/*",
+    "./scss/*": "./scss/*",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "tag": "next"
+  }
+}

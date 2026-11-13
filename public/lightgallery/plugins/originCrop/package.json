@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-origin-crop.umd.js",
+  "module": "lg-origin-crop.es5.js",
+  "typings": "../../types/plugins/originCrop/lg-origin-crop.d.ts"
+}

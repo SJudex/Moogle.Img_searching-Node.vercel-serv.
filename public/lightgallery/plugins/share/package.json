@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-share.umd.js",
+  "module": "lg-share.es5.js",
+  "typings": "../../types/plugins/share/lg-share.d.ts"
+}

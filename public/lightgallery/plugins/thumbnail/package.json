@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-thumbnail.umd.js",
+  "module": "lg-thumbnail.es5.js",
+  "typings": "../../types/plugins/thumbnail/lg-thumbnail.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-medium-zoom.umd.js",
+  "module": "lg-medium-zoom.es5.js",
+  "typings": "../../types/plugins/mediumZoom/lg-medium-zoom.d.ts"
+}

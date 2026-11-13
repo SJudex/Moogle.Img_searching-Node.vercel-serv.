@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-justified.umd.js",
+  "module": "lg-justified.es5.js",
+  "typings": "../../types/plugins/justified/lg-justified.d.ts"
+}

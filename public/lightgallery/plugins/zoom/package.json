@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-zoom.umd.js",
+  "module": "lg-zoom.es5.js",
+  "typings": "../../types/plugins/zoom/lg-zoom.d.ts"
+}

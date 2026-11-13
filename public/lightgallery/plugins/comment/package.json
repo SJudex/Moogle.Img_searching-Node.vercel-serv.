@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-comment.umd.js",
+  "module": "lg-comment.es5.js",
+  "typings": "../../types/plugins/comment/lg-comment.d.ts"
+}

@@ -1,0 +1,88 @@
+interface ThumbnailStrings {
+    toggleThumbnails: string;
+}
+export interface ThumbnailsSettings {
+    /**
+     * Enable thumbnails for the gallery
+     */
+    thumbnail: boolean;
+    /**
+     * Enable thumbnail animation.
+     */
+    animateThumb: boolean;
+    /**
+     * Position of selected thumbnail.
+     */
+    currentPagerPosition: 'left' | 'middle' | 'right';
+    /**
+     * Position of thumbnails when the width of all thumbnails combined is less than the gallery's width.
+     *
+     */
+    alignThumbnails: 'left' | 'middle' | 'right';
+    /**
+     * Width of each thumbnail.
+     */
+    thumbWidth: number;
+    /**
+     * Height of each thumbnail.
+     */
+    thumbHeight: string;
+    /**
+     * Spacing between each thumbnail
+     */
+    thumbMargin: number;
+    /**
+     * control where the thumbnails should be appended.
+     * By default, thumbnails are appended to '.lg-components' which has inbuilt open close transitions
+     * If you don't want initial thumbnails transitions, or want to do more customization,
+     * you can append thumbnails to the lightGallery outer div -
+     * <a href="/demos/thumbnails/#static-thumbnails">Demo</a>
+     */
+    appendThumbnailsTo: '.lg-outer' | '.lg-components';
+    /**
+     * Enable toggle captions and thumbnails.
+     * @description not applicable if allowMediaOverlap is false
+     */
+    toggleThumb: boolean;
+    /**
+     * Enables desktop mouse drag support for thumbnails.
+     */
+    enableThumbDrag: boolean;
+    /**
+     * Enables thumbnail touch/swipe support for touch devices
+     */
+    enableThumbSwipe: boolean;
+    /**
+     * By setting the thumbnailSwipeThreshold (in px) you can set how far the user must swipe for the next/prev slide.
+     */
+    thumbnailSwipeThreshold: number;
+    /**
+     * Scrub the gallery with the thumbnail strip: while the strip is
+     * dragged (or gliding after a fling), the slide under the strip's
+     * travel position becomes current immediately, without slide
+     * transitions, the strip works like a scrubber instead of an
+     * independent scroll area. The full strip travel spans the whole
+     * gallery, so the first and last slides are always reachable.
+     * Requires `animateThumb`; taps still navigate normally.
+     * See <a href="/docs/thumbnail-scrubbing/">Thumbnail scrubbing</a>.
+     * @version V3.0.0
+     */
+    scrubThumbnails: boolean;
+    /**
+     * You can automatically load thumbnails for YouTube videos from YouTube by setting loadYouTubeThumbnail true
+     */
+    loadYouTubeThumbnail: boolean;
+    /**
+     * You can specify the thumbnail size by setting respective number.
+     */
+    youTubeThumbSize: number;
+    /**
+     * Custom translation strings for aria-labels
+     * @deprecated Set these labels on the core `strings` object instead,
+     * every user-facing string lives in that one contract. An explicitly set
+     * key here still wins (alias).
+     */
+    thumbnailPluginStrings?: Partial<ThumbnailStrings>;
+}
+export declare const thumbnailsSettings: ThumbnailsSettings;
+export {};

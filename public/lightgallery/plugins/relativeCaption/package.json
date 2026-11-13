@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-relative-caption.umd.js",
+  "module": "lg-relative-caption.es5.js",
+  "typings": "../../types/plugins/relativeCaption/lg-relative-caption.d.ts"
+}

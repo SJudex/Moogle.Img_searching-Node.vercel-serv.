@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "main": "lg-rotate.umd.js",
+  "module": "lg-rotate.es5.js",
+  "typings": "../../types/plugins/rotate/lg-rotate.d.ts"
+}
